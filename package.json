@@ -1,0 +1,28 @@
+{
+  "name": "mofron-build",
+  "version": "0.0.4",
+  "description": "the module that combined tag-convert and js-bundle into one",
+  "main": "index.js",
+  "bin": {
+    "mofron-build": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mofron-tag": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mofron/mofron-build.git"
+  },
+  "keywords": [
+    "mofron"
+  ],
+  "author": "simparts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mofron/mofron-build/issues"
+  },
+  "homepage": "https://github.com/mofron/mofron-build#readme"
+}
