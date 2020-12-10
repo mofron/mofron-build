@@ -20,7 +20,7 @@ exec(exec_cmd, (err, stdout, stderr) => {
 let bundle = () => {
     /* bundle js */
     console.log("*** bundling javascript");
-    let mode = (undefined !== process.argv[3]) ? process.argv[3] : "production";
+    let mode = (undefined !== process.argv[3]) ? process.argv[3] : "development";
     exec_cmd = "npx webpack --config " + __dirname + "/../../conf/webpack.config." + tag_tgt + ".js --mode " + mode;
     console.log(exec_cmd);
     exec(exec_cmd, (err, stdout, stderr) => {
