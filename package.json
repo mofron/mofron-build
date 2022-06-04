@@ -1,6 +1,6 @@
 {
   "name": "mofron-build",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "the module that combined tag-convert and js-bundle into one",
   "main": "index.js",
   "bin": {
