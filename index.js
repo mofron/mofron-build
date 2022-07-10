@@ -1,23 +1,36 @@
 #!/usr/bin/env node
+const cli_arg = require('command-line-args');
 const { exec } = require("child_process");
+
+let mofron = null;
+let mfout  = null;
+let config = null;
+
+if (2 === process.argv.length) {
+    mofron = "./mof/index.mf";
+    mfout  = "./js/index.js";
+    config = "./conf/webpack.config.index.js";
+} else if (3 === process.argv.length) {
+    mofron = "./mof/" + process.argv[2] + ".mf";
+    mfout  = "./js/" + process.argv[2] + ".js";
+    config = "./conf/webpack.config." + process.argv[2] + ".js";
+} else {
+    const def_opt = [
+        { name: 'mofron', alias: 'm', type: String },
+        { name: 'mfout',  alias: 'o', type: String },
+        { name: 'config', alias: 'c', type: String }
+    ];
+    const options = cli_arg(def_opt);
+    mofron = options.mofron;
+    mfout  = options.mfout;
+    config = options.config;
+}
 
 /* convert mofron tag to js */
 console.log("*** convert mofron tag to javascript");
-console.log(process.argv.length);
-//if (3 === process.argv.length) {
-//    
-//} else {
-//    
-//}
-
-let tag_tgt  = (undefined !== process.argv[2]) ? process.argv[2] : "index";
-let cnf_tgt  = (undefined !== process.argv[3]) ? process.argv[3] : tag_tgt;
-if (("production" === cnf_tgt) || ("development" === cnf_tgt)) {
-    cnf_tgt  = tag_tgt;
-}
-
-let exec_cmd = "npx mofron-tag ./mof/" + tag_tgt + ".mf ./js/"+ tag_tgt +".js";
+let exec_cmd = "npx mofron-tag " + mofron + " " + mfout;
 console.log(exec_cmd);
+
 exec(exec_cmd, (err, stdout, stderr) => {
     if (0 < stderr.length) {
         console.log(stderr);
@@ -32,13 +45,10 @@ exec(exec_cmd, (err, stdout, stderr) => {
 let bundle = () => {
     /* bundle js */
     console.log("*** bundling javascript");
-    let mode = process.argv[process.argv.length-1];
-    if (("production" !== mode) && ("development" !== mode)) {
-        mode = "development";
-    }
 
-    exec_cmd = "npx webpack --config " + __dirname + "/../../conf/webpack.config." + cnf_tgt + ".js --mode " + mode;
+    exec_cmd = "npx webpack --config " + config;
     console.log(exec_cmd);
+
     exec(exec_cmd, (err, stdout, stderr) => {
         if (0 < stderr.length) {
             console.log(stderr);

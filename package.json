@@ -1,6 +1,6 @@
 {
   "name": "mofron-build",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "the module that combined tag-convert and js-bundle into one",
   "main": "index.js",
   "bin": {
@@ -10,7 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "mofron-tag": ""
+    "mofron-tag": "",
+    "command-line-args": "",
+    "child_process": ""
   },
   "repository": {
     "type": "git",
